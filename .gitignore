@@ -1,3 +1,6 @@
+# Ignore URL files - preserve those in Notes, etc...
+*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
