@@ -43,8 +43,16 @@ print(f"Valid URLs - \n{valid_urls}")
 for url in valid_urls:
     try:
         cleaned_url = url.replace("http://", "")
-        subprocess.Popen([BRAVE_PATH, "--incognito", cleaned_url])
-        print(f"Opened {cleaned_url} in incognito mode")
+        process = subprocess.Popen([BRAVE_PATH, "--incognito", cleaned_url])
+        # process = subprocess.Popen([BRAVE_PATH, cleaned_url])
+        print(f"Opened {cleaned_url}")
+
+        # Terminate the subprocess gracefully
+        # process.terminate()
+        # process.wait()  # Wait for the process to finish
+
+        # Wait for the process to finish
+        # process.communicate()
     except FileNotFoundError:
         print(f"Error: Brave browser executable not found at {BRAVE_PATH}")
         exit(1)
