@@ -1,4 +1,5 @@
 import os
+import random
 import re
 import subprocess
 import tkinter as tk
@@ -29,6 +30,18 @@ except FileNotFoundError:
     print(f"Error: {os.path.basename(file_path)} not found. Make sure the file exists.")
     exit(1)
 
+
+def sort_and_return_random(arr, number):
+    """
+    Function: return random values or sorted array
+    """
+    if number >= len(arr):
+        return sorted(arr)
+
+    sorted_arr = sorted(arr)
+    return random.sample(sorted_arr, number)
+
+
 # Use regex to find URLs (http/https) in each line
 url_pattern = re.compile(r"https?://\S+")
 valid_urls = []
@@ -37,10 +50,16 @@ for line in content:
     valid_urls.extend(extracted_urls)
 
 # Print valid URLs
-print(f"Valid URLs - \n{valid_urls}")
+# print(f"Valid URLs - \n{valid_urls}")
+
+# Get list of sorted_urls and limit number to parameter
+final_urls = []
+num_elements = 25
+final_urls = sort_and_return_random(valid_urls, num_elements)
+
 
 # Open each valid URL in a new incognito mode tab
-for url in valid_urls:
+for url in final_urls:
     try:
         cleaned_url = url.replace("http://", "")
         process = subprocess.Popen([BRAVE_PATH, "--incognito", cleaned_url])
