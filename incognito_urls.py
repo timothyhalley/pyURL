@@ -1,3 +1,20 @@
+"""
+Module: launch_urls
+Description: This script opens URLs from a specified text file in either Brave or Edge browser on a Mac.
+             The browser and URL file are specified via command line arguments.
+
+Usage:
+    python launch_urls.py --browser edge --urlfile urls.txt
+    python launch_urls.py --browser brave --urlfile urls.txt
+
+Arguments:
+    --browser : Specify the browser to use (brave or edge).
+    --urlfile : Path to the text file containing URLs.
+
+Example:
+    python launch_urls.py --browser edge --urlfile urls.txt
+"""
+
 import os
 import random
 import re
