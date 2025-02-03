@@ -24,9 +24,10 @@ import subprocess
 import sys
 import time
 
-# Specify the paths to the Brave and Edge binaries (adjust as needed)
+# Specify the paths to the Brave, Edge, and Safari binaries (adjust as needed)
 BRAVE_PATH = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser"
 EDGE_PATH = "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
+SAFARI_PATH = "/Applications/Safari.app/Contents/MacOS/Safari"
 
 
 def sort_and_return_random(arr, number):
@@ -50,16 +51,24 @@ def main():
     parser = argparse.ArgumentParser(description="Open URLs in a specified browser.")
     parser.add_argument(
         "--browser",
-        choices=["brave", "edge"],
-        required=True,
-        help="Choose the browser: brave or edge",
+        choices=["brave", "edge", "safari"],
+        default="edge",
+        help="Choose the browser: brave, edge, or safari (default: edge)",
     )
     parser.add_argument(
         "--urlfile", required=True, help="Path to the text file containing URLs"
     )
-    parser.add_argument("--new-tab", action="store_true", help="Open URLs in new tabs")
     parser.add_argument(
-        "--delay", type=int, default=3, help="Delay between opening tabs in seconds"
+        "--new-tab",
+        action="store_true",
+        default=True,
+        help="Open URLs in new tabs (default: new tab)",
+    )
+    parser.add_argument(
+        "--delay",
+        type=int,
+        default=30,
+        help="Delay between opening tabs in seconds (default: 30 seconds)",
     )
     args = parser.parse_args()
 
@@ -68,6 +77,8 @@ def main():
         BROWSER_PATH = BRAVE_PATH
     elif args.browser == "edge":
         BROWSER_PATH = EDGE_PATH
+    elif args.browser == "safari":
+        BROWSER_PATH = SAFARI_PATH
     else:
         print("Error: Unsupported browser specified.")
         sys.exit(1)
