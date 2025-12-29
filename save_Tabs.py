@@ -1,6 +1,13 @@
 import subprocess
+import sys
+from datetime import datetime
 
-OUTPUT_FILE = "open_tabs.txt"
+# Generate timestamp for default filename
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+DEFAULT_OUTPUT_FILE = f"urls_Session_{timestamp}.txt"
+
+# If user provides a filename, use it; otherwise use timestamped default
+OUTPUT_FILE = sys.argv[1] if len(sys.argv) > 1 else DEFAULT_OUTPUT_FILE
 
 applescript = '''
 tell application "Brave Browser"
